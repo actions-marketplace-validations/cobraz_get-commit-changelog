@@ -9,10 +9,21 @@ jobs:
   test-action:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
       - uses: ./
         id: changelog
         with:
           base: bcd6c5c83303667d07f8f0eefabffb6260b0e24f
+      - name: Print changelog
+        run: echo "${{ steps.changelog.outputs.changelog }}"
+  test-action-with-empty-inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4
+      - uses: ./
+        id: changelog
+        with:
+          base: ''
+          head: ''
       - name: Print changelog
         run: echo "${{ steps.changelog.outputs.changelog }}"
